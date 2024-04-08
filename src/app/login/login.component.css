@@ -1,0 +1,7 @@
+.login-main {
+    display: flex;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(41,95,119,1) 54%, rgba(43,101,124,0.07466736694677867) 100%, rgba(0,212,255,1) 100%);
+    justify-content: center;
+    align-items: center;
+}

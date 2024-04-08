@@ -1,1 +1,22 @@
-<p>finances works!</p>
+<div class="login-main bg-transparent">
+    <form class="form my-form" (ngSubmit)="convert(convertForm)" #convertForm="ngForm">
+        <div class="form-group">
+            <input class="form-control" type="text" ngModel name="baseCurrency" />
+            <label class="col-sm-2 col-form-label" for="baseCurrency">Base Currency</label>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ngModel name="currencyToConvertTo" />
+            <label class="col-sm-2 col-form-label" for="currencyToConvertTo">Currency to convert to</label>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" ngModel name="sumToConvert" />
+            <label class="col-sm-2 col-form-label" for="sumToConvert">Sum to convert</label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </div>
+    </form>
+    <div>
+        <span>The result sum is {{ resultSum }}</span>
+    </div>
+</div>
