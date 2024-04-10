@@ -21,10 +21,10 @@ export class FinancesComponent {
 
   constructor(private http: HttpClient) { }
 
-  convert(convertForm: NgForm) {
-    this.baseCurrency = convertForm.value.baseCurrency;
-    this.currencyToConvertTo = convertForm.value.currencyToConvertTo;
-    this.sumToConvert = convertForm.value.sumToConvert;
+  convert() {
+    this.baseCurrency = this.convertForm.value.baseCurrency;
+    this.currencyToConvertTo = this.convertForm.value.currencyToConvertTo;
+    this.sumToConvert = this.convertForm.value.sumToConvert;
     const url = '/api/v1/finances/converter';
 
     const convertRequest: Convert = {

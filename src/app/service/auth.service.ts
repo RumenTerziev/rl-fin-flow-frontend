@@ -9,6 +9,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    return this.http.post<any>('http://localhost:8080/api/v1/login', { username, password });
-  }
+
+    const url = '/api/v1/authenticate';
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    return this.http.post<any>(url, formData);
+  
+  };
 }

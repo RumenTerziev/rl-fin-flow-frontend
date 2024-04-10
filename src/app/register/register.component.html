@@ -1,5 +1,15 @@
 <div class="login-main bg-transparent">
-    <form class="form my-form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <form class="form my-form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <div class="form-group">
+            <span><b>First name</b></span>
+            <input class="form-control" type="text" ngModel name="firstName" />
+            <label class="col-sm-2 col-form-label" for="usfirstNameername"></label>
+        </div>
+        <div class="form-group">
+            <span><b>Last name</b></span>
+            <input class="form-control" type="text" ngModel name="lastName" />
+            <label class="col-sm-2 col-form-label" for="lastName"></label>
+        </div>
         <div class="form-group">
             <span><b>Username</b></span>
             <input class="form-control" type="text" ngModel name="username" />

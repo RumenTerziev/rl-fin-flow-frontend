@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { catchError, map } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,28 +13,31 @@ export class LoginComponent implements OnInit {
 
   profileForm: NgForm
 
-  @ViewChild('createBookForm') loginForm: NgForm;
+  @ViewChild('loginForm') loginForm: NgForm;
 
   username: string;
   password: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void { }
 
-  onSubmit(loginForm: NgForm): void {
-    this.username = loginForm.value.username;
-    this.password = loginForm.value.password;
-    const url = '/api/v1/authenticate';
+  onSubmit(): void {
+    this.username = this.loginForm.value.username;
+    this.password = this.loginForm.value.password;
 
-    const formData = new FormData();
-    formData.append('username', this.username);
-    formData.append('password', this.password);
+    this.authService.login(this.username, this.password)
+      .subscribe(
+        {
+          next: (data) => {
+            this.router.navigate(['/finances']);
+            console.log(data);
+          },
+          error: (e) => console.error(e),
+          complete: () => console.info('complete')
+        }
+      );
 
-    this.http.post(url, formData)
-      .subscribe(() => {
-        console.log('Success');
-      });
     this.username = '';
     this.password = '';
   }
