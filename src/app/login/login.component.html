@@ -1,12 +1,14 @@
 <div class="login-main bg-transparent">
     <form class="form my-form" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
         <div class="form-group">
+            <span><b>Username</b></span>
             <input class="form-control" type="text" ngModel name="username" />
-            <label class="col-sm-2 col-form-label" for="username">Username</label>
+            <label class="col-sm-2 col-form-label" for="username"></label>
         </div>
         <div class="form-group">
+            <span><b>Password</b></span>
             <input class="form-control" type="text" ngModel name="password" />
-            <label class="col-sm-2 col-form-label" for="password">Password</label>
+            <label class="col-sm-2 col-form-label" for="password"></label>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-danger">Submit</button>

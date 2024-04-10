@@ -31,14 +31,10 @@ export class LoginComponent implements OnInit {
     formData.append('username', this.username);
     formData.append('password', this.password);
 
-    this.http.post(url, formData, { observe: 'response' }).pipe(
-      catchError((err) => {
-        console.error(err);
-        return err;
-      })
-    ).subscribe((resp) => {
-      console.log('resp');
-    });
+    this.http.post(url, formData)
+      .subscribe(() => {
+        console.log('Success');
+      });
     this.username = '';
     this.password = '';
   }

@@ -1,22 +1,26 @@
-<div class="login-main bg-transparent">
+<div class="form-container bg-transparent">
     <form class="form my-form" (ngSubmit)="convert(convertForm)" #convertForm="ngForm">
         <div class="form-group">
+            <span><b>Base Currency</b></span>
             <input class="form-control" type="text" ngModel name="baseCurrency" />
-            <label class="col-sm-2 col-form-label" for="baseCurrency">Base Currency</label>
+            <label class="col-sm-2 col-form-label" for="baseCurrency"></label>
         </div>
         <div class="form-group">
+            <span><b>Currency to convert to</b></span>
             <input class="form-control" type="text" ngModel name="currencyToConvertTo" />
-            <label class="col-sm-2 col-form-label" for="currencyToConvertTo">Currency to convert to</label>
+            <label class="col-sm-2 col-form-label" for="currencyToConvertTo"></label>
         </div>
         <div class="form-group">
+            <span><b>Sum to convert</b></span>
             <input class="form-control" type="text" ngModel name="sumToConvert" />
-            <label class="col-sm-2 col-form-label" for="sumToConvert">Sum to convert</label>
+            <label class="col-sm-2 col-form-label" for="sumToConvert"></label>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-danger">Submit</button>
         </div>
+        <span>The result sum is {{ resultSum }}</span>
     </form>
     <div>
-        <span>The result sum is {{ resultSum }}</span>
+        
     </div>
 </div>
