@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { catchError, map } from 'rxjs';
+import { map } from 'rxjs';
 import { Converted } from '../model/converted.model';
 import { Convert } from '../model/convert.model';
 
@@ -16,8 +16,8 @@ export class FinancesComponent {
 
   baseCurrency: string;
   currencyToConvertTo: string;
-  sumToConvert: string;
-  resultSum: string;
+  sumToConvert: number;
+  resultSum: number;
 
   constructor(private http: HttpClient) { }
 
@@ -45,8 +45,8 @@ export class FinancesComponent {
           return converted;
         })
       )
-      .subscribe((resp) => {
-        this.resultSum = resp.resultSum;
+      .subscribe((resp: Converted) => {
+        this.resultSum = parseFloat(resp.resultSum.toFixed(4));
         console.log(resp);
       });
     this.convertForm.reset();

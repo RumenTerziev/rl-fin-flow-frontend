@@ -1,10 +1,9 @@
 nav {
-
     padding-left: 25%;
     padding-right: 25%;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-bottom: 10px;
-    background-color: #d9534f;
+    background-color: lightcoral;
 }
 
 ul {
@@ -13,6 +12,10 @@ ul {
     justify-content: space-between;
     margin-right: auto;
     list-style: none;
+}
+
+a {
+   
 }
 
 img {
