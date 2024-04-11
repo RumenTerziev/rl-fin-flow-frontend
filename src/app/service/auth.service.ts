@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FinFlowUser } from '../model/fin-flow-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,22 @@ export class AuthService {
     formData.append('password', password);
 
     return this.http.post<any>(url, formData);
-  
-  };
+
+  }
+
+  register(username: string, password: string, firstName: string, lastName: string, email: string, phoneNumber: string) {
+
+    const url = '/api/v1/users/register';
+
+    const user: FinFlowUser = {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      phoneNumber
+    };
+
+    return this.http.post<any>(url, user);
+  }
 }

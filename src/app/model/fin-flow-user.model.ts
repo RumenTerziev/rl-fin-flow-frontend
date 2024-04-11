@@ -3,5 +3,6 @@ export class FinFlowUser {
     public password: string;
     public firstName: string;
     public lastName: string;
-    private _token: string;
+    public email: string;
+    public phoneNumber: string;
 }

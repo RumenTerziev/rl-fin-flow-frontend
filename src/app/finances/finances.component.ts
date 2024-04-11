@@ -49,8 +49,6 @@ export class FinancesComponent {
         this.resultSum = resp.resultSum;
         console.log(resp);
       });
-    this.baseCurrency = '';
-    this.currencyToConvertTo = '';
-    this.sumToConvert = '';
+    this.convertForm.reset();
   }
 }

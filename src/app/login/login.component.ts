@@ -1,4 +1,3 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
         }
       );
 
-    this.username = '';
-    this.password = '';
+    this.loginForm.reset();
   }
 }

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,25 +17,35 @@ export class RegisterComponent implements OnInit {
 
   username: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void { }
 
   onSubmit(): void {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
-    const url = '/authenticate';
+    this.firstName = this.registerForm.value.firstName;
+    this.lastName = this.registerForm.value.lastName;
+    this.email = this.registerForm.value.email;
+    this.phoneNumber = this.registerForm.value.phoneNumber;
 
-    const formData = new FormData();
-    formData.append('username', this.username);
-    formData.append('password', this.password);
+    this.authService.register(this.username, this.password, this.firstName, this.lastName, this.email, this.phoneNumber)
+      .subscribe(
+        {
+          next: (data) => {
+            this.router.navigate(['/login']);
+            console.log(data);
+          },
+          error: (e) => console.error(e),
+          complete: () => console.info('complete')
+        }
+      );
 
-    this.http.post(url, formData)
-      .subscribe(() => {
-        console.log('Success');
-      });
-    this.username = '';
-    this.password = '';
+    this.registerForm.reset();
   }
 }
