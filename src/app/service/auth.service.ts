@@ -11,7 +11,7 @@ export class AuthService {
 
   login(username: string, password: string) {
 
-    const url = '/api/v1/authenticate';
+    const url = '/api/v1/users/authenticate';
 
     const formData = new FormData();
     formData.append('username', username);
@@ -35,5 +35,11 @@ export class AuthService {
     };
 
     return this.http.post<any>(url, user);
+  }
+
+  logout() {
+    const url = '/api/v1/users/logout';
+
+    return this.http.post<any>(url, {});
   }
 }
