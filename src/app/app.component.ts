@@ -20,7 +20,6 @@ export class AppComponent {
       {
         next: () => {
           this.router.navigate(['/login']);
-          console.log('success');
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete')

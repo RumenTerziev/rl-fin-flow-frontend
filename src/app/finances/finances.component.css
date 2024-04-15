@@ -1,14 +1,3 @@
-@media screen and (max-width: 500px) {
-
-  .main {
-    padding-left: 40px;
-  }
-
-  .my-form {
-      max-width: 130px;
-  }
-}
-
 .main {
   display: flex;
   justify-content: center;
@@ -34,4 +23,15 @@ span {
 
 label {
   color: red;
+}
+
+@media screen and (max-width: 500px) {
+
+  .main {
+    padding-left: 40px;
+  }
+
+  .my-form {
+      max-width: 130px;
+  }
 }

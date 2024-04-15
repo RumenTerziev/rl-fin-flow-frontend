@@ -10,8 +10,6 @@ import { AuthService } from '../service/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  profileForm: NgForm
-
   @ViewChild('loginForm') loginForm: NgForm;
 
   username: string;
@@ -28,9 +26,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username, this.password)
       .subscribe(
         {
-          next: (data) => {
+          next: () => {
             this.router.navigate(['/finances']);
-            console.log(data);
           },
           error: (e) => console.error(e),
           complete: () => console.info('complete')

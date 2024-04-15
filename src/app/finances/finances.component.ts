@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { Converted } from '../model/converted.model';
@@ -10,7 +10,11 @@ import { Convert } from '../model/convert.model';
   templateUrl: './finances.component.html',
   styleUrl: './finances.component.css'
 })
-export class FinancesComponent {
+export class FinancesComponent implements OnInit{
+
+  ngOnInit(): void {
+    this.isHidden = true;
+  }
 
   @ViewChild('convertForm') convertForm: NgForm;
 
@@ -18,6 +22,7 @@ export class FinancesComponent {
   currencyToConvertTo: string;
   sumToConvert: number;
   resultSum: number;
+  isHidden: boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -47,7 +52,7 @@ export class FinancesComponent {
       )
       .subscribe((resp: Converted) => {
         this.resultSum = parseFloat(resp.resultSum.toFixed(4));
-        console.log(resp);
+        this.isHidden = false;
       });
     this.convertForm.reset();
   }

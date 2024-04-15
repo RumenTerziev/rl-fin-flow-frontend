@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<table class="table bg-primary">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone number</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="finFlowUser">
+            <td [textContent]="finFlowUser.username"></td>
+            <td [textContent]="finFlowUser.firstName"></td>
+            <td [textContent]="finFlowUser.lastName"></td>
+            <td [textContent]="finFlowUser.email"></td>
+            <td [textContent]="finFlowUser.phoneNumber"></td>
+        </tr>
+    </tbody>
+</table>
+
