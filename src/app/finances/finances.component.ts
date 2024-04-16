@@ -4,13 +4,14 @@ import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { Converted } from '../model/converted.model';
 import { Convert } from '../model/convert.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finances',
   templateUrl: './finances.component.html',
   styleUrl: './finances.component.css'
 })
-export class FinancesComponent implements OnInit{
+export class FinancesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isHidden = true;
@@ -24,7 +25,7 @@ export class FinancesComponent implements OnInit{
   resultSum: number;
   isHidden: boolean;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   convert() {
     this.baseCurrency = this.convertForm.value.baseCurrency;
@@ -50,10 +51,19 @@ export class FinancesComponent implements OnInit{
           return converted;
         })
       )
-      .subscribe((resp: Converted) => {
-        this.resultSum = parseFloat(resp.resultSum.toFixed(4));
-        this.isHidden = false;
-      });
+      .subscribe(
+        {
+          next: (resp: Converted) => {
+            this.resultSum = parseFloat(resp.resultSum.toFixed(4));
+            this.isHidden = false;
+          },
+          error: (e) => {
+            console.error(e);
+            alert('You are not logged in!');
+            this.router.navigate(['/login']);
+          },
+          complete: () => console.info('complete')
+        });
     this.convertForm.reset();
   }
 }

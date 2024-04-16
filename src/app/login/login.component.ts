@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         {
           next: () => {
             this.router.navigate(['/finances']);
+            alert(`Welcome ${this.username}!!!`);
           },
           error: (e) => console.error(e),
           complete: () => console.info('complete')
