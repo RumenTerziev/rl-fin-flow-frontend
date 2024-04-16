@@ -64,6 +64,5 @@ export class FinancesComponent implements OnInit {
           },
           complete: () => console.info('complete')
         });
-    this.convertForm.reset();
   }
 }
