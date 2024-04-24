@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-
   profileForm: NgForm
 
   @ViewChild('registerForm') registerForm: NgForm;

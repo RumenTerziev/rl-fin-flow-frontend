@@ -4,33 +4,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { FinancesComponent } from './finances/finances.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './register/register.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FinancesModule } from './finances/finances.module';
+import { AuthModule } from './auth/auth.module';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FinancesComponent,
     ProfileComponent,
-    LoginComponent,
-    RegisterComponent
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FinancesModule,
+    AuthModule
   ],
-  providers: [AuthService, provideAnimationsAsync()],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  
-}
+export class AppModule { }

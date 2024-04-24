@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FinFlowUser } from '../model/fin-flow-user.model';
+import { FinFlowUser } from '../../model/fin-flow-user.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   constructor(private http: HttpClient) { }
