@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/finances']);
             alert(`Welcome ${this.username}!!!`);
           },
-          error: (e) => console.error(e),
+          error: (e) => {
+            alert('Wrong username or password!')
+            console.error(e)
+          },
           complete: () => console.info('complete')
         }
       );

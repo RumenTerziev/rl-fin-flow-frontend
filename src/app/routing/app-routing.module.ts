@@ -5,11 +5,12 @@ import { FinancesComponent } from '../finances/finances.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'finances', component: FinancesComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'finances', component: FinancesComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
 ];

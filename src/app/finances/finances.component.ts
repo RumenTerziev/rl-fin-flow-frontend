@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { map } from 'rxjs';
 import { Converted } from '../model/converted.model';
-import { Convert } from '../model/convert.model';
 import { Router } from '@angular/router';
+import { FinancesService } from './service/finances.service';
 
 @Component({
   selector: 'app-finances',
@@ -18,6 +16,7 @@ export class FinancesComponent implements OnInit {
   }
 
   @ViewChild('convertForm') convertForm: NgForm;
+  conversions: Converted[] = [];
 
   baseCurrency: string;
   currencyToConvertTo: string;
@@ -25,37 +24,23 @@ export class FinancesComponent implements OnInit {
   resultSum: number;
   isHidden: boolean;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private financesService: FinancesService, private router: Router) { }
 
-  convert() {
+  onConvertRequest() {
     this.baseCurrency = this.convertForm.value.baseCurrency;
     this.currencyToConvertTo = this.convertForm.value.currencyToConvertTo;
     this.sumToConvert = this.convertForm.value.sumToConvert;
-    const url = '/api/v1/finances/converter';
 
-    const convertRequest: Convert = {
-      baseCurrency: this.baseCurrency,
-      currencyToConvertTo: this.currencyToConvertTo,
-      sumToConvert: this.sumToConvert
-    };
-
-    this.http.post(url, convertRequest)
-      .pipe(
-        map((response: Converted) => {
-          const converted = {
-            baseCurrency: response.baseCurrency,
-            currencyToConvertTo: response.currencyToConvertTo,
-            sumToConvert: response.sumToConvert,
-            resultSum: response.resultSum
-          };
-          return converted;
-        })
-      )
+    this.financesService.convertCurrency(this.baseCurrency, this.currencyToConvertTo, this.sumToConvert)
       .subscribe(
         {
           next: (resp: Converted) => {
             this.resultSum = parseFloat(resp.resultSum.toFixed(4));
             this.isHidden = false;
+            this.financesService.fetchConversionsHistory()
+            .subscribe((resp: Converted[]) => {
+              this.conversions = resp;
+            });
           },
           error: (e) => {
             console.error(e);

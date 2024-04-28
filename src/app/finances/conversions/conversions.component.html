@@ -1,0 +1,19 @@
+<table class="table bg-primary">
+    <thead>
+        <tr *ngIf="conversions.length > 0">
+            <th scope="col">Base currency</th>
+            <th scope="col">Sum to convert</th>
+            <th scope="col">Currency to convert to</th>
+            <th scope="col">Result sum</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let conversion of conversions">
+            <td [textContent]="conversion.baseCurrency"></td>
+            <td [textContent]="conversion.sumToConvert"></td>
+            <td [textContent]="conversion.currencyToConvertTo"></td>
+            <td [textContent]="conversion.resultSum"></td>
+        </tr>
+    </tbody>
+</table>
+

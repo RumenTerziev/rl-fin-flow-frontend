@@ -5,13 +5,13 @@
     <li class="nav nav-item active">
       <a class="nav-link" routerLink="/home"><b>Home</b></a>
     </li>
-    <li class="nav nav-item active">
+    <li class="nav nav-item active" *ngIf="isAuthenticated">
       <a class="nav-link" routerLink="/finances"><b>Finances</b></a>
     </li>
-    <li class="nav nav-item active">
+    <li class="nav nav-item active" *ngIf="isAuthenticated">
       <a class="nav-link" routerLink="/profile"><b>Profile</b></a>
     </li>
-    <li class="nav nav-item active">
+    <li class="nav nav-item active" *ngIf="!isAuthenticated">
       <a class="nav-link" routerLink="/login"><b>Login</b></a>
     </li>
     <li class="nav nav-item active">
@@ -21,7 +21,7 @@
       <a class="nav-link" href="https://github.com/RumenTerziev" target="_blank"><b>Github</b></a>
     </li>
     <li class="nav nav-item active">
-      <app-logout></app-logout>
+      <app-logout *ngIf="isAuthenticated"></app-logout>
     </li>
   </ul>
 </nav>

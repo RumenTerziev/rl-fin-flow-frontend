@@ -1,5 +1,5 @@
 <div class="main bg-transparent">
-    <form class="form my-form" (ngSubmit)="convert()" #convertForm="ngForm">
+    <form class="form my-form" (ngSubmit)="onConvertRequest()" #convertForm="ngForm">
         <div class="form-group">
             <span><b>Base Currency</b></span>
             <input class="form-control" type="text" ngModel required name="baseCurrency" />
@@ -20,7 +20,8 @@
         </div>
         <span [hidden]="isHidden"> {{ sumToConvert }} {{ baseCurrency }} are equal to {{ resultSum }} {{currencyToConvertTo}}</span>
     </form>
-    <div>
-        
-    </div>
+</div>
+
+<div>
+    <app-conversions [conversions]="conversions"></app-conversions>
 </div>
