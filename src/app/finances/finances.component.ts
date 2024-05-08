@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Converted } from '../model/converted.model';
 import { Router } from '@angular/router';
 import { FinancesService } from './service/finances.service';
+import { PageResult } from '../model/page-result.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-finances',
@@ -13,10 +15,13 @@ export class FinancesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isHidden = true;
+    this.financesService.fetchConversionsHistory(0);
   }
 
   @ViewChild('convertForm') convertForm: NgForm;
+  private pageResultSub: Subscription;
   conversions: Converted[] = [];
+  totalRecords: number;
 
   baseCurrency: string;
   currencyToConvertTo: string;
@@ -37,9 +42,13 @@ export class FinancesComponent implements OnInit {
           next: (resp: Converted) => {
             this.resultSum = parseFloat(resp.resultSum.toFixed(4));
             this.isHidden = false;
-            this.financesService.fetchConversionsHistory()
-            .subscribe((resp: Converted[]) => {
-              this.conversions = resp;
+            this.financesService.fetchConversionsHistory(0)
+              .subscribe((resp: PageResult) => {
+                this.conversions = resp.items;
+                this.totalRecords = resp.totalRecords;
+              });
+            this.pageResultSub = this.financesService.pageResult.subscribe(page => {
+              page !== null;
             });
           },
           error: (e) => {

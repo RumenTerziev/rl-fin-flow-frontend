@@ -5,6 +5,7 @@
             <th scope="col">Sum to convert</th>
             <th scope="col">Currency to convert to</th>
             <th scope="col">Result sum</th>
+            <th scope="col">Converted at</th>
         </tr>
     </thead>
     <tbody>
@@ -13,7 +14,16 @@
             <td [textContent]="conversion.sumToConvert"></td>
             <td [textContent]="conversion.currencyToConvertTo"></td>
             <td [textContent]="conversion.resultSum"></td>
+            <td [textContent]="conversion.createdAt"></td>
         </tr>
     </tbody>
 </table>
 
+<div class="btn-container">
+    <button [disabled]="disablePreviousPage" class="btn btn-danger" (click)="previousPage()">Previous Page</button>
+    <div class="span-container">
+      <span class="text-light" [innerText]="page"></span>
+    </div>
+    <button [disabled]="disableNextPage" class="btn btn-info" (click)="nextPage()">Next Page</button>
+  </div>
+  

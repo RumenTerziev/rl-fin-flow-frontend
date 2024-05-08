@@ -3,4 +3,5 @@ export class Converted {
     currencyToConvertTo: string;
     sumToConvert: string;
     resultSum: number;
+    createdAt: Date;
 }

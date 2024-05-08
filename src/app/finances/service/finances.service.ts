@@ -1,21 +1,25 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs";
+import { BehaviorSubject, map } from "rxjs";
 import { Converted } from "../../model/converted.model";
 import { Convert } from "../../model/convert.model";
+import { PageResult } from "../../model/page-result.model";
 
 @Injectable()
 export class FinancesService {
 
+    pageResult = new BehaviorSubject<PageResult>(null);
+
     constructor(private http: HttpClient) { }
 
-    fetchConversionsHistory() {
-        const conversionsUrl = '/api/v1/finances/my-conversions';
+    fetchConversionsHistory(page: number) {
+        const conversionsUrl = `/api/v1/finances/my-conversions?page=${page}`;
         return this.http.get(conversionsUrl)
             .pipe(
-                map((response: Converted[]) => {
-                    const conversions = response;
-                    return conversions;
+                map((response: PageResult) => {
+                    const pageResult = response;
+                    this.pageResult.next(pageResult);
+                    return pageResult;
                 })
             );
     }
