@@ -64,7 +64,7 @@ export class AuthService {
 
     if (loadedUser.username) {
       this.user.next(loadedUser);
-      this.autoLogout(100000000);
+      this.autoLogout(100000);
     }
   }
 

@@ -1,0 +1,6 @@
+{
+    "/api/v1/**": {
+        "target": "http://rl-fin-flow-api:8081",
+        "secure": false
+    }
+}
