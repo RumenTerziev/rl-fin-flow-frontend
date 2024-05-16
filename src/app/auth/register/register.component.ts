@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
   username: string;
   password: string;
+  confirmPassword: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -28,12 +29,13 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     this.username = this.registerForm.value.username;
     this.password = this.registerForm.value.password;
+    this.confirmPassword = this.registerForm.value.confirmPassword;
     this.firstName = this.registerForm.value.firstName;
     this.lastName = this.registerForm.value.lastName;
     this.email = this.registerForm.value.email;
     this.phoneNumber = this.registerForm.value.phoneNumber;
 
-    this.authService.register(this.username, this.password, this.firstName, this.lastName, this.email, this.phoneNumber)
+    this.authService.register(this.username, this.password, this.confirmPassword, this.firstName, this.lastName, this.email, this.phoneNumber)
       .subscribe(
         {
           next: () => {

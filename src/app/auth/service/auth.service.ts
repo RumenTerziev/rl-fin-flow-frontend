@@ -29,13 +29,19 @@ export class AuthService {
         }));
   }
 
-  register(username: string, password: string, firstName: string, lastName: string, email: string, phoneNumber: string) {
+  register(username: string, password: string, confirmPassword: string, firstName: string, lastName: string, email: string, phoneNumber: string) {
 
     const url = '/api/v1/users/register';
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
 
     const user: FinFlowUser = {
       username,
       password,
+      confirmPassword,
       firstName,
       lastName,
       email,
