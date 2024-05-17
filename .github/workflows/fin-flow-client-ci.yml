@@ -27,7 +27,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: rl-fin-flow-client application
+      - name: rl-fin-flow-frontend application
         run: npm run build -- --prod
 
       - name: Deploy to GitHub Pages
@@ -35,15 +35,13 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/YOUR_PROJECT_NAME
+          publish_dir: ./dist/rl-fin-flow-frontend
 
-      # Optional Docker build and push
       - name: Docker login
-        if: github.ref == 'refs/heads/main'
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Docker build and push
         if: github.ref == 'refs/heads/main'
         run: |
-          docker build -t ghcr.io/rumenterziev/rl-fin-flow-client:latest .
-          docker push ghcr.io/rumenterziev/rl-fin-flow-client:latest
+          docker build -t ghcr.io/rumenterziev/rl-fin-flow-frontend:latest .
+          docker push ghcr.io/rumenterziev/rl-fin-flow-frontend:latest
