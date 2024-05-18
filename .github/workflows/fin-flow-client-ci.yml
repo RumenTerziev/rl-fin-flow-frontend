@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: rl-fin-flow-frontend application
-        run: npm run build -- --prod
+        run: npm run build
 
       - name: Docker login
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
