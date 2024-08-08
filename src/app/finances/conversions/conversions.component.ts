@@ -66,7 +66,6 @@ export class ConversionsComponent implements OnInit, OnChanges {
   }
 
   updateNextAndPreviousPageButtons() {
-    console.log(this.totalRecords);
     this.disableNextPage = this.totalRecords <= this.page * 5;
     this.disablePreviousPage = this.page - 1 <= 0;
   }
