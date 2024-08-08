@@ -2,21 +2,21 @@
     <form class="form my-form" (ngSubmit)="onConvertRequest()" #convertForm="ngForm">
         <div class="form-group">
             <span><b>Select Base Currency</b></span>
-            <select class="form-control" type="text" ngModel required name="baseCurrency">
-                <option>BGN</option>
-                <option>EUR</option>
-                <option>USD</option>
-                <option>CAD</option>
+            <select class="form-select" ngModel required name="baseCurrency">
+                <option value="BGN">BGN</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="CAD">CAD</option>
             </select> 
             <label class="col-sm-2 col-form-label" for="baseCurrency"></label>
         </div>
         <div class="form-group">
             <span><b>Select Currency to convert to</b></span>
-            <select class="form-control" type="text" ngModel required name="currencyToConvertTo">
-                <option>BGN</option>
-                <option>EUR</option>
-                <option>USD</option>
-                <option>CAD</option>
+            <select class="form-select" ngModel required name="currencyToConvertTo">
+                <option value="BGN">BGN</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="CAD">CAD</option>
             </select>
             <label class="col-sm-2 col-form-label" for="currencyToConvertTo"></label>
         </div>
