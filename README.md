@@ -28,6 +28,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Additional info:
 
+### There is proxy configuration for the requests to the backend. 
+
 ### For docker container or for production environment nginx server is used.
-> There is proxy configuration for the requests to the backend. 
+> If you run the app that way or with the docker compose which is explained in the backend then the gui may be found on localhost and default 
+> port 80.
 > You may find the backend application here: [rl-fin-flow-api](https://github.com/RumenTerziev/rl-fin-flow)
