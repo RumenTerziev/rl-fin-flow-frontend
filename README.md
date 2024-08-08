@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Additional info:
+
+### For docker container or for production environment nginx server is used.
+> There is proxy configuration for the requests to the backend. 
+> You may find the backend application here: [rl-fin-flow-api](https://github.com/RumenTerziev/rl-fin-flow)
