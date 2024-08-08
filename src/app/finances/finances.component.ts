@@ -53,7 +53,7 @@ export class FinancesComponent implements OnInit {
           },
           error: (e) => {
             console.error(e);
-            alert('You are not logged in!');
+            alert('Something went wrong! Please review your input and try again!');
             this.router.navigate(['/login']);
           },
           complete: () => console.info('complete')
