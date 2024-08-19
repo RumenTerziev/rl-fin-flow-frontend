@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Converted } from '../../model/converted.model';
 import { FinancesService } from '../service/finances.service';
 import { PageResult } from '../../model/page-result.model';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './conversions.component.html',
   styleUrl: './conversions.component.css'
 })
-export class ConversionsComponent implements OnInit, OnChanges {
+export class ConversionsComponent implements OnInit, OnDestroy {
 
   private pageResultSub: Subscription;
 
@@ -23,18 +23,20 @@ export class ConversionsComponent implements OnInit, OnChanges {
   constructor(private financesService: FinancesService) { }
 
   ngOnInit(): void {
-    this.fetchConversions(this.page);
-    this.updateNextAndPreviousPageButtons();
     this.pageResultSub = this.financesService.pageResult.subscribe(page => {
-      page !== null;
-      this.totalRecords = page.totalRecords;
-      this.conversions  =page.items;
+      if (page !== null) {
+        this.totalRecords = page.totalRecords;
+        this.conversions = page.items;
+        this.updateNextAndPreviousPageButtons();
+      }
     });
+    this.fetchConversions(this.page);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.fetchConversions(this.page);
-    this.updateNextAndPreviousPageButtons();
+  ngOnDestroy(): void {
+    if (this.pageResultSub) {
+      this.pageResultSub.unsubscribe();
+    }
   }
 
   fetchConversions(page: number) {
@@ -42,9 +44,7 @@ export class ConversionsComponent implements OnInit, OnChanges {
       .subscribe((resp: PageResult) => {
         this.conversions = resp.items;
         this.totalRecords = resp.totalRecords;
-      });
-      this.pageResultSub = this.financesService.pageResult.subscribe(page => {
-        page !== null;
+        this.updateNextAndPreviousPageButtons();
       });
   }
 
@@ -53,16 +53,13 @@ export class ConversionsComponent implements OnInit, OnChanges {
       this.page++;
       this.fetchConversions(this.page);
     }
-    this.updateNextAndPreviousPageButtons();
   }
 
   previousPage() {
-    if (this.page - 1 <= 0) {
-      return;
+    if (this.page - 1 > 0) {
+      this.page--;
+      this.fetchConversions(this.page);
     }
-    this.page--;
-    this.fetchConversions(this.page);
-    this.updateNextAndPreviousPageButtons();
   }
 
   updateNextAndPreviousPageButtons() {
