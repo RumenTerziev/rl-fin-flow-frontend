@@ -6,17 +6,19 @@ import { ProfileComponent } from '../profile/profile.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { ChatAiComponent } from '../chat-ai/chat-ai.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'finances', component: FinancesComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'chat-ai', component: ChatAiComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FinancesModule } from './finances/finances.module';
 import { AuthModule } from './auth/auth.module';
+import { ChatAiComponent } from './chat-ai/chat-ai.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChatAiComponent
   ],
   imports: [
     BrowserModule,

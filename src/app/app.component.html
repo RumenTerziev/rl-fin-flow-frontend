@@ -9,6 +9,9 @@
       <a class="nav-link" routerLink="/finances"><b>Finances</b></a>
     </li>
     <li class="nav nav-item active" *ngIf="isAuthenticated">
+      <a class="nav-link" routerLink="/chat-ai"><b>Chat with AI</b></a>
+    </li>
+    <li class="nav nav-item active" *ngIf="isAuthenticated">
       <a class="nav-link" routerLink="/profile"><b>Profile</b></a>
     </li>
     <li class="nav nav-item active" *ngIf="!isAuthenticated">
