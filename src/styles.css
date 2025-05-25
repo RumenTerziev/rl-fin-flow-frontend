@@ -1,4 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  body {
+    background-image: url('/assets/images/istockphoto-1402430796-612x612.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .nav-item a, .nav-item button {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+      padding: 12px 16px;
+    }
+  
+    .my-form {
+      padding: 24px 16px;
+    }
+  
+    .chat-container {
+      height: 80vh;
+    }
+  }
+  

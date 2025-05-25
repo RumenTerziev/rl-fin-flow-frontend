@@ -1,38 +1,82 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #e3edf7;
+}
+
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(41, 95, 119, 1) 54%, rgba(43, 101, 124, 0.07466736694677867) 100%, rgba(0, 212, 255, 1) 100%);
-    mix-blend-mode: normal;
-    border: 2px solid lightblue;
-    border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.my-form {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+span {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+label {
+  display: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 1rem;
   }
-  
+
   .my-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 24px 16px;
+    max-width: 100%;
   }
-  
-  span {
-    display: block;
-    color: aliceblue;
-  }
-  
-  label {
-    color: red;
-  }
-
-  @media screen and (max-width: 500px) {
-
-    .main {
-      padding-left: 40px;
-    }
-  
-    .my-form {
-        max-width: 130px;
-    }
-  }
-  
+}
