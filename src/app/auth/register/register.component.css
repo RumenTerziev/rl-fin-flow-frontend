@@ -10,7 +10,6 @@ html, body {
 .main {
   display: flex;
   justify-content: center;
-  align-items: center;
   min-height: 80vh;
   padding: 2rem;
   box-sizing: border-box;
