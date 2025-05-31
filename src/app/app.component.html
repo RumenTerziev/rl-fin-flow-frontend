@@ -15,7 +15,7 @@
     <li class="nav nav-item active" *ngIf="!isAuthenticated">
       <a class="nav-link" routerLink="/login"><b>Login</b></a>
     </li>
-    <li class="nav nav-item active">
+    <li class="nav nav-item active" *ngIf="!isAuthenticated">
       <a class="nav-link" routerLink="/register"><b>Register</b></a>
     </li>
     <li class="nav nav-item active">
