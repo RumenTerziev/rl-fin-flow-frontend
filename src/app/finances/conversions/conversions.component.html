@@ -5,6 +5,7 @@
             <th scope="col">Sum to convert</th>
             <th scope="col">Currency to convert to</th>
             <th scope="col">Result sum</th>
+            <th scope="col">Currency rate</th>
             <th scope="col">Converted at</th>
         </tr>
     </thead>
@@ -14,6 +15,7 @@
             <td [textContent]="conversion.sumToConvert"></td>
             <td [textContent]="conversion.currencyToConvertTo"></td>
             <td [textContent]="conversion.resultSum"></td>
+            <td [textContent]="conversion.currencyRate"></td>
             <td [textContent]="conversion.createdAt"></td>
         </tr>
     </tbody>

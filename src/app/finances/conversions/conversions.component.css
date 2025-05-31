@@ -21,3 +21,38 @@
     color: #fff;
   }
   
+
+  table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  word-wrap: break-word;
+}
+
+th, td {
+  padding: 12px 8px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
+@media screen and  (max-width: 768px) {
+  th, td {
+    font-size: 0.75rem;
+    padding: 8px 4px;
+  }
+
+  th:nth-child(n), td:nth-child(n) {
+    display: table-cell;
+  }
+}
+
+thead th {
+  background-color: #004085;
+  color: #fff;
+}
+
+tbody td {
+  background-color: rgba(255, 255, 255, 0.9);
+}

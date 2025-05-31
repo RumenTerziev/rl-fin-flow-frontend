@@ -40,7 +40,8 @@ export class FinancesService {
                         baseCurrency: response.baseCurrency,
                         currencyToConvertTo: response.currencyToConvertTo,
                         sumToConvert: response.sumToConvert,
-                        resultSum: response.resultSum
+                        resultSum: response.resultSum,
+                        currencyRate: response.currencyRate
                     };
                     return converted;
                 })
