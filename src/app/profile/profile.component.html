@@ -1,20 +1,22 @@
-<table class="table bg-primary">
+<div class="table-container">
+  <table class="table bg-primary">
     <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone number</th>
-        </tr>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone number</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngIf="finFlowUser">
-            <td [textContent]="finFlowUser.username"></td>
-            <td [textContent]="finFlowUser.firstName"></td>
-            <td [textContent]="finFlowUser.lastName"></td>
-            <td [textContent]="finFlowUser.email"></td>
-            <td [textContent]="finFlowUser.phoneNumber"></td>
-        </tr>
+      <tr *ngIf="finFlowUser">
+        <td data-label="Username" [textContent]="finFlowUser.username"></td>
+        <td data-label="First name" [textContent]="finFlowUser.firstName"></td>
+        <td data-label="Last name" [textContent]="finFlowUser.lastName"></td>
+        <td data-label="Email" [textContent]="finFlowUser.email"></td>
+        <td data-label="Phone number" [textContent]="finFlowUser.phoneNumber"></td>
+      </tr>
     </tbody>
-</table>
+  </table>
+</div>
