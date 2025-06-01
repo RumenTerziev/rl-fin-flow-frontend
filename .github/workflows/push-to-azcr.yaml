@@ -1,0 +1,36 @@
+name: Build and Push Docker Images to ACR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: rl-fin-flow-frontend application
+        run: npm run build
+
+      - name: Log in to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and Push
+        run: |
+          docker build -t ${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:v1.0 .
+          docker push ${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:v1.0
