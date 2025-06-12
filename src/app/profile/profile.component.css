@@ -10,7 +10,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* fix widths, but allow wrapping */
+  table-layout: fixed;
   word-wrap: break-word;
 }
 
@@ -19,7 +19,6 @@ th, td {
   text-align: left;
   border-bottom: 1px solid #dee2e6;
 
-  /* Allow wrapping inside cells */
   white-space: normal !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -30,7 +29,6 @@ th {
   color: white;
 }
 
-/* Set flexible widths with min-width to avoid too narrow columns */
 th:nth-child(1), td:nth-child(1) {
   width: 18%;
   min-width: 90px;
@@ -45,22 +43,19 @@ th:nth-child(3), td:nth-child(3) {
 }
 th:nth-child(4), td:nth-child(4) {
   width: 28%;
-  min-width: 150px; /* give more room for emails */
+  min-width: 150px;
 }
 th:nth-child(5), td:nth-child(5) {
   width: 18%;
   min-width: 90px;
 }
 
-/* Responsive font size */
 @media screen and (max-width: 480px) {
   .table-container {
     font-size: 13px;
   }
-  /* Same widths but text still wraps */
 }
 
-/* For very small screens, reduce font size and keep wrapping */
 @media screen and (max-width: 320px) {
   .table-container {
     font-size: 12px;

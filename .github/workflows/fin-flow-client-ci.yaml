@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +33,5 @@ jobs:
       - name: Docker build and push
         if: github.ref == 'refs/heads/main'
         run: |
-          docker build -t ghcr.io/rumenterziev/rl-fin-flow-frontend:v1 .
-          docker push ghcr.io/rumenterziev/rl-fin-flow-frontend:v1
+          docker build -t ghcr.io/rumenterziev/dlrfinflow-frontend:v1 .
+          docker push ghcr.io/rumenterziev/dlrfinflow-frontend:v1
