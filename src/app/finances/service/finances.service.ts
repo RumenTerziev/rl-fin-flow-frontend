@@ -13,7 +13,7 @@ export class FinancesService {
     constructor(private http: HttpClient) { }
 
     fetchConversionsHistory(page: number) {
-        const conversionsUrl = `/api/v1/finances/my-conversions?page=${page}`;
+        const conversionsUrl = `/api/v1/finances/conversions/mine?page=${page}`;
         return this.http.get(conversionsUrl)
             .pipe(
                 map((response: PageResult) => {
