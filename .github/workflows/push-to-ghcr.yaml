@@ -43,4 +43,4 @@ jobs:
           docker push "$VERSION_IMAGE"
 
           echo "Pushing $LATEST_IMAGE"
-          docker push "$LATEST_IMAGE"Build and Push Docker Images to ACR - Frontend
+          docker push "$LATEST_IMAGE"
