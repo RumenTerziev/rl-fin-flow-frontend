@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit{
 
 
   ngOnInit(): void {
-    const url = "/api/v1/users/profile"
+    const url = "/api/v1/users/me"
     this.http.get(url)
     .pipe(
       map((response: FinFlowUser) => {

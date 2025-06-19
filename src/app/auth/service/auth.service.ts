@@ -14,7 +14,7 @@ export class AuthService {
 
   login(username: string, password: string) {
 
-    const url = '/api/v1/users/authenticate';
+    const url = '/api/v1/auth/login';
 
     const formData = new FormData();
     formData.append('username', username);
@@ -31,7 +31,7 @@ export class AuthService {
 
   register(username: string, password: string, confirmPassword: string, firstName: string, lastName: string, email: string, phoneNumber: string) {
 
-    const url = '/api/v1/users/register';
+    const url = '/api/v1/auth/register';
 
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   logout() {
-    const url = '/api/v1/users/logout';
+    const url = '/api/v1/auth/logout';
     this.user.next(null);
     localStorage.removeItem('userData');
     return this.http.post<any>(url, {});
