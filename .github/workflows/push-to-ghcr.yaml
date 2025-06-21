@@ -21,11 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build rl-fin-flow-frontend application
+      - name: Build frontend app
         run: npm run build
 
       - name: Extract tag version
-        id: get_tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Docker login to GHCR
@@ -36,11 +35,6 @@ jobs:
           VERSION_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:${VERSION}"
           LATEST_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:latest"
 
-          echo "Building Docker image: $VERSION_IMAGE"
           docker build -t "$VERSION_IMAGE" -t "$LATEST_IMAGE" .
-
-          echo "Pushing $VERSION_IMAGE"
           docker push "$VERSION_IMAGE"
-
-          echo "Pushing $LATEST_IMAGE"
           docker push "$LATEST_IMAGE"

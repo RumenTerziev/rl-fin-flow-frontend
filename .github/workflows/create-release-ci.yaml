@@ -26,11 +26,15 @@ jobs:
           else
             major=$(echo "$latest_tag" | cut -d. -f1 | sed 's/v//')
             minor=$(echo "$latest_tag" | cut -d. -f2)
+
             if [ "$minor" -lt 9 ]; then
-              new_tag="v${major}.$((minor + 1))"
+              new_minor=$((minor + 1))
+              new_tag="v${major}.${new_minor}"
             else
-              new_tag="v$((major + 1)).0"
+              new_major=$((major + 1))
+              new_tag="v${new_major}.0"
             fi
+
             base_ref="$latest_tag"
           fi
 
@@ -38,25 +42,22 @@ jobs:
           echo "BASE_TAG=$base_ref" >> $GITHUB_ENV
 
       - name: Generate changelog
-        id: changelog
         run: |
           if [ -z "${{ env.BASE_TAG }}" ]; then
             log=$(git log --pretty=format:"- %s" HEAD~20..HEAD)
           else
             log=$(git log --pretty=format:"- %s" ${{ env.BASE_TAG }}..HEAD)
           fi
+
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "$log" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Create and push tag using PAT
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Create tag
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag ${{ env.NEW_TAG }}
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
           git push origin ${{ env.NEW_TAG }}
 
       - name: Create GitHub Release
