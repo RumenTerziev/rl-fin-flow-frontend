@@ -25,25 +25,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build rl-fin-flow-frontend application
+      - name: Build frontend application
         run: npm run build
 
-      - name: Get tag version
-        run: echo "VERSION=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
+      - name: Get tag from previous workflow output
+        run: echo "VERSION=${{ github.event.workflow_run.outputs.new_tag }}" >> $GITHUB_ENV
 
       - name: Docker login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and Push Docker Images
         run: |
-          TAG="${{ github.event.workflow_run.head_commit.message }}" # fallback
-          if [[ -n "${{ github.event.workflow_run.head_commit.id }}" ]]; then
-            TAG=$(git describe --tags --exact-match ${{ github.event.workflow_run.head_commit.id }} 2>/dev/null || echo "${{ github.event.workflow_run.head_branch }}")
-          fi
-
-          # Use the new tag from the release workflow:
-          VERSION="${{ github.event.workflow_run.head_branch }}"
-
+          VERSION=${VERSION}
           VERSION_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:${VERSION}"
           LATEST_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:latest"
 
