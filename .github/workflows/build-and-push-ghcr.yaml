@@ -1,17 +1,21 @@
 name: Build and Push Docker Images to GHCR - Frontend
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["Auto Tag and Release (MAJOR.MINOR)"]
+    types:
+      - completed
 
 jobs:
   build-and-push:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -24,9 +28,12 @@ jobs:
       - name: Build rl-fin-flow-frontend application
         run: npm run build
 
-      - name: Extract tag version
+      - name: Extract latest tag
         id: get_tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0)
+          echo "VERSION=${latest_tag}" >> $GITHUB_ENV
+          echo "Using tag version: $latest_tag"
 
       - name: Docker login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
