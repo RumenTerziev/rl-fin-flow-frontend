@@ -1,9 +1,9 @@
-name: Build and Push Docker Images to ACR - Frontend
+name: Build and Push Docker Images to GHCR - Frontend
 
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build-and-push:
@@ -28,17 +28,13 @@ jobs:
         id: get_tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Log in to ACR
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.ACR_REGISTRY }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+      - name: Docker login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and Push Docker Images
         run: |
-          VERSION_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:${VERSION}"
-          LATEST_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:latest"
+          VERSION_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:${VERSION}"
+          LATEST_IMAGE="ghcr.io/rumenterziev/dlrfinflow-frontend:latest"
 
           echo "Building Docker image: $VERSION_IMAGE"
           docker build -t "$VERSION_IMAGE" -t "$LATEST_IMAGE" .
