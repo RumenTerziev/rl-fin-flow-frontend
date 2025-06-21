@@ -10,9 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Extract tag version
         id: get_tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Determine previous tag
+        id: previous
+        run: |
+          previous_tag=$(git tag --sort=-creatordate | grep -E '^v[0-9]+\.[0-9]+$' | grep -v "${{ env.VERSION }}" | head -n 1 || true)
+          echo "PREVIOUS_TAG=${previous_tag}" >> $GITHUB_ENV
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          if [ -z "${{ env.PREVIOUS_TAG }}" ]; then
+            log=$(git log --pretty=format:"- %s" -n 20)
+          else
+            log=$(git log ${{ env.PREVIOUS_TAG }}..${{ env.VERSION }} --pretty=format:"- %s")
+          fi
+
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+          echo "$log" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -25,5 +49,7 @@ jobs:
             - Docker images tagged with this version.
             - Check changelog and docs for details.
 
+            ### Changelog
+            ${{ env.CHANGELOG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
