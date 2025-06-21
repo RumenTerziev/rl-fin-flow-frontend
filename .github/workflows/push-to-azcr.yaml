@@ -1,32 +1,37 @@
-name: Build and Push Docker Images to ACR - Backend
+name: Build and Push Docker Images to ACR - Frontend
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["Auto Tag and Release (MAJOR.MINOR)"]
+    types:
+      - completed
 
 jobs:
   build-and-push:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Java and Gradle
-        uses: actions/setup-java@v3
         with:
-          java-version: "21"
-          distribution: "temurin"
-          cache: gradle
+          fetch-depth: 0
 
-      - name: Build backend application
-        run: ./gradlew build
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
 
-      - name: Extract tag version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: npm install
 
-      - name: Docker login to ACR
+      - name: Build rl-fin-flow-frontend application
+        run: npm run build
+
+      - name: Get tag version
+        run: echo "VERSION=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
+
+      - name: Log in to ACR
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.ACR_REGISTRY }}
@@ -35,9 +40,16 @@ jobs:
 
       - name: Build and Push Docker Images
         run: |
-          VERSION_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-api:${VERSION}"
-          LATEST_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-api:latest"
+          VERSION="${{ github.event.workflow_run.head_branch }}"
 
+          VERSION_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:${VERSION}"
+          LATEST_IMAGE="${{ secrets.ACR_REGISTRY }}/dlrfinflow-frontend:latest"
+
+          echo "Building Docker image: $VERSION_IMAGE"
           docker build -t "$VERSION_IMAGE" -t "$LATEST_IMAGE" .
+
+          echo "Pushing $VERSION_IMAGE"
           docker push "$VERSION_IMAGE"
+
+          echo "Pushing $LATEST_IMAGE"
           docker push "$LATEST_IMAGE"

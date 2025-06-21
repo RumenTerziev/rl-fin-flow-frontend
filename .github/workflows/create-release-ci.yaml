@@ -42,6 +42,7 @@ jobs:
           echo "BASE_TAG=$base_ref" >> $GITHUB_ENV
 
       - name: Generate changelog
+        id: changelog
         run: |
           if [ -z "${{ env.BASE_TAG }}" ]; then
             log=$(git log --pretty=format:"- %s" HEAD~20..HEAD)
