@@ -1,7 +1,7 @@
 export class Converted {
-  baseCurrency: string;
-  currencyToConvertTo: string;
-  sumToConvert: string;
+  fromCurrency: string;
+  toCurrency: string;
+  amount: number;
   resultSum: number;
   currencyRate: number;
   createdAt: Date;

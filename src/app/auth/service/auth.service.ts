@@ -6,31 +6,33 @@ import { User } from '../../model/user.model';
 
 @Injectable()
 export class AuthService {
-
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-
     const url = '/api/v1/auth/login';
 
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
 
-    return this.http.post(url, formData)
-      .pipe(
-        tap((resp: User) => {
-          const user = new User(resp.username);
-          this.user.next(user);
-          localStorage.setItem('userData', JSON.stringify(user));
-        }));
+    return this.http.post(url, formData).pipe(
+      tap((resp: User) => {
+        const user = new User(resp.username);
+        this.user.next(user);
+        localStorage.setItem('userData', JSON.stringify(user));
+      })
+    );
   }
 
-  register(username: string, password: string, confirmPassword: string, firstName: string, lastName: string, email: string, phoneNumber: string) {
-
+  register(
+    username: string,
+    password: string,
+    confirmPassword: string,
+    email: string
+  ) {
     const url = '/api/v1/auth/register';
 
     if (password !== confirmPassword) {
@@ -42,10 +44,7 @@ export class AuthService {
       username,
       password,
       confirmPassword,
-      firstName,
-      lastName,
       email,
-      phoneNumber
     };
 
     return this.http.post<any>(url, user);

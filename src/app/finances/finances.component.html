@@ -1,34 +1,34 @@
 <div class="main bg-transparent">
     <form class="form my-form" (ngSubmit)="onConvertRequest()" #convertForm="ngForm">
         <div class="form-group">
-            <span><b>Select Base Currency</b></span>
-            <select class="form-select" ngModel required name="baseCurrency">
-                <option value="BGN">BGN</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="CAD">CAD</option>
-            </select> 
-            <label class="col-sm-2 col-form-label" for="baseCurrency"></label>
-        </div>
-        <div class="form-group">
-            <span><b>Select Currency to convert to</b></span>
-            <select class="form-select" ngModel required name="currencyToConvertTo">
+            <span><b>From</b></span>
+            <select class="form-select" [(ngModel)]="fromCurrency" required name="fromCurrency">
                 <option value="BGN">BGN</option>
                 <option value="EUR">EUR</option>
                 <option value="USD">USD</option>
                 <option value="CAD">CAD</option>
             </select>
-            <label class="col-sm-2 col-form-label" for="currencyToConvertTo"></label>
+            <label class="col-sm-2 col-form-label" for="fromCurrency"></label>
         </div>
         <div class="form-group">
-            <span><b>Sum to convert</b></span>
-            <input class="form-control" type="text" ngModel required name="sumToConvert" />
-            <label class="col-sm-2 col-form-label" for="sumToConvert"></label>
+            <span><b>To</b></span>
+            <select class="form-select" [(ngModel)]="toCurrency" required name="toCurrency">
+                <option value="BGN">BGN</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="CAD">CAD</option>
+            </select>
+            <label class="col-sm-2 col-form-label" for="toCurrency"></label>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-danger" [disabled]="!convertForm.valid">Submit</button>
+            <span><b>Amount</b></span>
+            <input class="form-control" type="number" [(ngModel)]="amount" required name="amount" />
+            <label class="col-sm-2 col-form-label" for="amount"></label>
         </div>
-        <span [hidden]="isHidden"> {{ sumToConvert }} {{ baseCurrency }} are equal to {{ resultSum }} {{currencyToConvertTo}}</span>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger" [disabled]="!convertForm.valid">Convert</button>
+        </div>
+        <span [hidden]="isHidden"> {{ amount }} {{ fromCurrency }} are equal to {{ resultSum }} {{ toCurrency }}</span>
     </form>
 </div>
 
