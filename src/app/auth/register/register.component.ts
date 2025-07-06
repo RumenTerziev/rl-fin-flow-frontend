@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-
-  profileForm: NgForm
+  profileForm: NgForm;
 
   @ViewChild('registerForm') registerForm: NgForm;
 
@@ -22,9 +21,9 @@ export class RegisterComponent implements OnInit {
   email: string;
   phoneNumber: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     this.username = this.registerForm.value.username;
@@ -35,18 +34,28 @@ export class RegisterComponent implements OnInit {
     this.email = this.registerForm.value.email;
     this.phoneNumber = this.registerForm.value.phoneNumber;
 
-    this.authService.register(this.username, this.password, this.confirmPassword, this.firstName, this.lastName, this.email, this.phoneNumber)
-      .subscribe(
-        {
-          next: () => {
-            this.router.navigate(['/login']);
-            alert(`Successfully registered user ${this.username}!`);
-          },
-          error: (e) => console.error(e),
-          complete: () => console.info('complete')
-        }
-      );
-
-    this.registerForm.reset();
+    this.authService
+      .register(
+        this.username,
+        this.password,
+        this.confirmPassword,
+        this.firstName,
+        this.lastName,
+        this.email,
+        this.phoneNumber
+      )
+      .subscribe({
+        next: () => {
+          this.registerForm.reset();
+          alert(`Successfully registered user ${this.username}!`);
+          this.router.navigate(['/login']);
+        },
+        error: (e) => {
+          console.error(e);
+        },
+        complete: () => {
+          console.info('Registration request complete.');
+        },
+      });
   }
 }
