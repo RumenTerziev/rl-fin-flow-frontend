@@ -35,15 +35,7 @@ export class RegisterComponent implements OnInit {
     this.phoneNumber = this.registerForm.value.phoneNumber;
 
     this.authService
-      .register(
-        this.username,
-        this.password,
-        this.confirmPassword,
-        this.firstName,
-        this.lastName,
-        this.email,
-        this.phoneNumber
-      )
+      .register(this.username, this.password, this.confirmPassword, this.email)
       .subscribe({
         next: () => {
           this.registerForm.reset();

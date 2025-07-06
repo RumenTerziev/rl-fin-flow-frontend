@@ -3,19 +3,13 @@
     <thead>
       <tr>
         <th scope="col">Username</th>
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
         <th scope="col">Email</th>
-        <th scope="col">Phone number</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngIf="finFlowUser">
         <td data-label="Username" [textContent]="finFlowUser.username"></td>
-        <td data-label="First name" [textContent]="finFlowUser.firstName"></td>
-        <td data-label="Last name" [textContent]="finFlowUser.lastName"></td>
         <td data-label="Email" [textContent]="finFlowUser.email"></td>
-        <td data-label="Phone number" [textContent]="finFlowUser.phoneNumber"></td>
       </tr>
     </tbody>
   </table>

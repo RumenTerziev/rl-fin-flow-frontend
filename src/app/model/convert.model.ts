@@ -1,5 +1,5 @@
 export class Convert {
-    baseCurrency: string;
-    currencyToConvertTo: string;
-    sumToConvert: number;
+  fromCurrency: string;
+  toCurrency: string;
+  amount: number;
 }

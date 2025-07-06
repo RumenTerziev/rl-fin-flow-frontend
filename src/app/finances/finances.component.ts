@@ -23,20 +23,20 @@ export class FinancesComponent implements OnInit {
   conversions: Converted[] = [];
   totalRecords: number;
 
-  baseCurrency: string;
-  currencyToConvertTo: string;
-  sumToConvert: number;
+  fromCurrency: string = "BGN";
+  toCurrency: string = "EUR";
+  amount: number = 1;
   resultSum: number;
   isHidden: boolean;
 
   constructor(private financesService: FinancesService, private router: Router) { }
 
   onConvertRequest() {
-    this.baseCurrency = this.convertForm.value.baseCurrency;
-    this.currencyToConvertTo = this.convertForm.value.currencyToConvertTo;
-    this.sumToConvert = this.convertForm.value.sumToConvert;
+    this.fromCurrency = this.convertForm.value.fromCurrency;
+    this.toCurrency = this.convertForm.value.toCurrency;
+    this.amount = this.convertForm.value.amount;
 
-    this.financesService.convertCurrency(this.baseCurrency, this.currencyToConvertTo, this.sumToConvert)
+    this.financesService.convertCurrency(this.fromCurrency, this.toCurrency, this.amount)
       .subscribe(
         {
           next: (resp: Converted) => {
