@@ -11,13 +11,17 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { FinancesModule } from './finances/finances.module';
 import { AuthModule } from './auth/auth.module';
 import { ChatAiComponent } from './chat-ai/chat-ai.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from './loader/loader.interceptor';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    ChatAiComponent
+    ChatAiComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,9 +29,12 @@ import { ChatAiComponent } from './chat-ai/chat-ai.component';
     FormsModule,
     HttpClientModule,
     FinancesModule,
-    AuthModule
+    AuthModule,
   ],
-  providers: [provideAnimationsAsync()],
-  bootstrap: [AppComponent]
+  providers: [
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
