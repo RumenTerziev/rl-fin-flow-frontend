@@ -7,6 +7,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { ChatAiComponent } from '../chat-ai/chat-ai.component';
+import { AboutComponent } from '../about/about.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'chat-ai', component: ChatAiComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent },
 ];
 
 @NgModule({
