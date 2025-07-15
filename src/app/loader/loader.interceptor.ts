@@ -16,6 +16,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (req.url.includes("/chat")) {
+      return next.handle(req);
+    }
+
     this.loader.show(200);
     return next.handle(req).pipe(finalize(() => this.loader.hide()));
   }

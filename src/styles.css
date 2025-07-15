@@ -1,35 +1,36 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e1f26 0%, #3c3f58 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #f8f9fa;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-item a,
+  .nav-item button {
+    padding: 6px 12px;
+    font-size: 14px;
   }
-  
-  body {
-    background-image: url('/assets/images/istockphoto-1402430796-612x612.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+
+  h1 {
+    font-size: 1.5rem;
+    padding: 12px 16px;
   }
-  
-  @media screen and (max-width: 600px) {
-    .nav-item a, .nav-item button {
-      padding: 6px 12px;
-      font-size: 14px;
-    }
-  
-    h1 {
-      font-size: 1.5rem;
-      padding: 12px 16px;
-    }
-  
-    .my-form {
-      padding: 24px 16px;
-    }
-  
-    .chat-container {
-      height: 80vh;
-    }
+
+  .my-form {
+    padding: 24px 16px;
   }
-  
+
+  .chat-container {
+    height: 80vh;
+  }
+}

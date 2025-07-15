@@ -1,4 +1,71 @@
-<div class="heading-container">
-    <h1>Welcome to our Fin Flow application!</h1>
+<section class="hero" aria-label="Welcome section">
+  <img src="assets/images/profile.jpg" alt="Profile Picture of the app creator" class="profile-pic" />
+  <h1>Welcome to My Personal Website</h1>
+  <p class="subtitle">
+    A personal site showcasing my projects, skills, and a few handy tools like a currency converter
+    and AI chatbot. Go login <a routerLink="/login" class="link" tabindex="0">here</a> to get
+    started or <a routerLink="/register" class="link" tabindex="0">register</a> if you don't have an account.
+  </p>
+  <p class="subtitle">
+    If already logged in, you can access the tools directly:
+  </p>
+  <a routerLink="/finances" class="btn-primary" tabindex="0">Start Converting</a>
+  <a routerLink="/chat-ai" class="btn-secondary" tabindex="0">Chat with AI</a>
+</section>
+
+<section class="about-preview" aria-labelledby="about-title">
+  <h2 id="about-title">About This Project</h2>
+  <p>
+    This personal website serves as both my portfolio and a showcase of practical tools I have built, including a
+    currency converter and an AI-powered chatbot. It highlights my skills in Angular, Spring Boot and full-stack
+    development through real-world applications.
+  </p>
+  <a routerLink="/profile" class="link" tabindex="0">Learn more about me →</a>
+</section>
+
+<section class="skills" aria-labelledby="tech-title">
+  <h2 id="tech-title">Tech Stack</h2>
+  <div class="tech-icons">
+    <div class="tech-icon" title="Angular">
+      <img src="assets/icons/angular.png" alt="Angular" />
+      <span>Angular</span>
+    </div>
+    <div class="tech-icon" title="TypeScript">
+      <img src="assets/icons/typescript.png" alt="TypeScript" />
+      <span>TypeScript</span>
+    </div>
+    <div class="tech-icon" title="Spring Boot">
+      <img src="assets/icons/springboot.png" alt="Spring Boot" />
+      <span>Spring Boot</span>
+    </div>
+    <div class="tech-icon" title="Java">
+      <img src="assets/icons/java.png" alt="Java" />
+      <span>Java</span>
+    </div>
+    <div class="tech-icon" title="MySQL">
+      <img src="assets/icons/mysql.png" alt="MySQL" />
+      <span>MySQL</span>
+    </div>
+    <div class="tech-icon" title="Azure">
+      <img src="assets/icons/azure.png" alt="Azure" />
+      <span>Azure</span>
+    </div>
   </div>
-  
+</section>
+
+<section class="lets-connect" aria-labelledby="connect-title">
+  <h2 id="connect-title">Let's Connect</h2>
+  <p>Feel free to reach out or check out my work on LinkedIn and GitHub.</p>
+  <div class="connect-links">
+    <a href="https://www.linkedin.com/in/rumen-terziev-a511a7272/" target="_blank" rel="noopener" class="btn-linkedin"
+      tabindex="0" aria-label="LinkedIn Profile">
+      <img src="assets/icons/linkedin.png" alt="LinkedIn icon" />
+      LinkedIn
+    </a>
+    <a href="https://github.com/RumenTerziev" target="_blank" rel="noopener" class="btn-github" tabindex="0"
+      aria-label="GitHub Profile">
+      <img src="assets/icons/github.png" alt="GitHub icon" />
+      GitHub
+    </a>
+  </div>
+</section>
