@@ -10,6 +10,7 @@ import { ChatAiComponent } from '../chat-ai/chat-ai.component';
 import { AboutComponent } from '../about/about.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'finances', component: FinancesComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
