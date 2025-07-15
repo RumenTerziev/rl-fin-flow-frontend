@@ -14,6 +14,7 @@ import { ChatAiComponent } from './chat-ai/chat-ai.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './loader/loader.interceptor';
 import { LoaderComponent } from './loader/loader.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LoaderComponent } from './loader/loader.component';
     ProfileComponent,
     ChatAiComponent,
     LoaderComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

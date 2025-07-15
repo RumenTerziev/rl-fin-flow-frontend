@@ -85,3 +85,25 @@ label {
     font-size: 0.95rem;
   }
 }
+
+@media screen and (min-width: 900px) {
+  .main {
+    max-width: 600px;
+    padding: 3rem;
+    min-height: 560px;
+  }
+
+  .form-title {
+    font-size: 2rem;
+  }
+
+  .form-control {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+  }
+}
