@@ -1,31 +1,70 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FinFlowUser } from '../model/fin-flow-user.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit{
-
+export class ProfileComponent implements OnInit {
   finFlowUser: FinFlowUser;
+  editMode: boolean = false;
+  profileForm: FormGroup;
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    const url = "/api/v1/users/me"
-    this.http.get(url)
-    .pipe(
-      map((response: FinFlowUser) => {
-        const userProfile = response;
-        return userProfile;
-      })
-    )
-    .subscribe((resp: FinFlowUser) => {
-      this.finFlowUser = resp;
-    });    
+    this.loadUser();
+  }
+
+  loadUser() {
+    this.http.get<FinFlowUser>('/api/v1/users/me').subscribe((user) => {
+      this.finFlowUser = user;
+      this.createForm();
+    });
+  }
+
+  createForm() {
+    this.profileForm = this.fb.group({
+      email: [this.finFlowUser.email, [Validators.required, Validators.email]],
+      password: ['', [Validators.minLength(6)]],
+    });
+  }
+
+  enableEdit() {
+    this.editMode = true;
+    this.createForm();
+  }
+
+  cancelEdit() {
+    this.editMode = false;
+  }
+
+  saveChanges() {
+    if (this.profileForm.invalid) {
+      this.profileForm.markAllAsTouched();
+      return;
+    }
+
+    const payload: any = {
+      email: this.profileForm.value.email.trim(),
+    };
+
+    if (this.profileForm.value.password) {
+      payload.password = this.profileForm.value.password;
+    }
+
+    this.http.put('/api/v1/users/me', payload).subscribe({
+      next: () => {
+        this.loadUser();
+        this.editMode = false;
+      },
+      error: (err) => {
+        console.error('Update failed:', err);
+        alert('Could not update user info.');
+      },
+    });
   }
 }

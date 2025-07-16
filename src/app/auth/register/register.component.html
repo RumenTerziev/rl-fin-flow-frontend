@@ -1,32 +1,60 @@
 <div class="main">
-  <form class="my-form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+  <form class="my-form" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
     <h2 class="form-title">Register</h2>
 
     <div class="form-group">
       <label for="username">Username</label>
-      <input class="form-control" type="text" name="username" id="username" ngModel required
-        placeholder="Choose a username" />
+      <input class="form-control" type="text" name="username" id="username" ngModel required minlength="3"
+        #username="ngModel" placeholder="Choose a username"
+        [class.invalid]="username.invalid && (username.dirty || username.touched)" />
+      <div class="error" *ngIf="username.invalid && (username.dirty || username.touched)">
+        <small *ngIf="username.errors?.required">Username is required.</small>
+        <small *ngIf="username.errors?.minlength">Username must be at least 3 characters.</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" ngModel required
-        placeholder="Create a password" />
+      <input class="form-control" type="password" name="password" id="password" ngModel required minlength="6"
+        #password="ngModel" placeholder="Create a password"
+        [class.invalid]="password.invalid && (password.dirty || password.touched)" />
+      <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <small *ngIf="password.errors?.required">Password is required.</small>
+        <small *ngIf="password.errors?.minlength">Password must be at least 6 characters.</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="confirmPassword">Confirm Password</label>
       <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" ngModel required
-        placeholder="Repeat your password" />
+        #confirmPassword="ngModel" placeholder="Repeat your password" [class.invalid]="
+          (confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)) ||
+          (password.value !== confirmPassword.value && confirmPassword.dirty)
+        " />
+      <div class="error" *ngIf="
+          (confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)) ||
+          (password.value !== confirmPassword.value && confirmPassword.dirty)
+        ">
+        <small *ngIf="confirmPassword.errors?.required">Confirm password is required.</small>
+        <small *ngIf="password.value !== confirmPassword.value">Passwords do not match.</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input class="form-control" type="email" name="email" id="email" ngModel required placeholder="you@example.com" />
+      <input class="form-control" type="email" name="email" id="email" ngModel required email #email="ngModel"
+        placeholder="you@example.com" [class.invalid]="email.invalid && (email.dirty || email.touched)" />
+      <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <small *ngIf="email.errors?.required">Email is required.</small>
+        <small *ngIf="email.errors?.email">Please enter a valid email address.</small>
+      </div>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-danger" [disabled]="!registerForm.valid">Register</button>
+      <button type="submit" class="btn btn-danger"
+        [disabled]="!registerForm.valid || password.value !== confirmPassword.value">
+        Register
+      </button>
     </div>
   </form>
 </div>

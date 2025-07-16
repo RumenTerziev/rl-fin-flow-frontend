@@ -20,16 +20,43 @@
 .hero {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
-  padding: 60px 20px;
+  padding: 40px 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: left;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: left;
+  width: 100%;
+}
+
+.hero-image {
+  flex-shrink: 0;
 }
 
 .profile-pic {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 16px;
-  border: 3px solid #dc3545;
+  border: 2px solid #dc3545;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.hero-text {
+  max-width: 500px;
+  flex: 1;
 }
 
 .subtitle {
@@ -77,8 +104,9 @@
 
 h1,
 h2 {
+  color: #222;
   font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
 }
 
@@ -131,21 +159,34 @@ p {
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
   .profile-pic {
     width: 140px;
     height: 140px;
+    margin-bottom: 16px;
   }
+
   .hero {
     padding: 40px 15px;
     margin: 10px;
   }
+
   .btn-primary,
   .btn-secondary {
     padding: 8px 16px;
     font-size: 0.9rem;
     margin-right: 8px;
   }
+
   .about-preview,
   .skills {
     margin: 20px 10px;

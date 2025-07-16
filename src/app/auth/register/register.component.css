@@ -32,13 +32,6 @@ body {
   margin-bottom: 20px;
 }
 
-span {
-  display: block;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 6px;
-}
-
 input.form-control {
   width: 100%;
   padding: 10px 14px;
@@ -46,6 +39,18 @@ input.form-control {
   border-radius: 6px;
   font-size: 15px;
   box-sizing: border-box;
+}
+
+input.invalid {
+  border-color: #e74c3c;
+  background-color: #ffe6e6;
+}
+
+.error small {
+  color: #e74c3c;
+  font-weight: 600;
+  display: block;
+  margin-top: 4px;
 }
 
 label {

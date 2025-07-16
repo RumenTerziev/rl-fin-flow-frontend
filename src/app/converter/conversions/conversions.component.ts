@@ -1,16 +1,15 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Converted } from '../../model/converted.model';
-import { FinancesService } from '../service/finances.service';
+import { ConverterService } from '../service/converter.service';
 import { PageResult } from '../../model/page-result.model';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-conversions',
   templateUrl: './conversions.component.html',
-  styleUrl: './conversions.component.css'
+  styleUrl: './conversions.component.css',
 })
 export class ConversionsComponent implements OnInit, OnDestroy {
-
   private pageResultSub: Subscription;
 
   page: number = 1;
@@ -20,10 +19,10 @@ export class ConversionsComponent implements OnInit, OnDestroy {
 
   @Input() conversions: Converted[] = [];
 
-  constructor(private financesService: FinancesService) { }
+  constructor(private converterService: ConverterService) {}
 
   ngOnInit(): void {
-    this.pageResultSub = this.financesService.pageResult.subscribe(page => {
+    this.pageResultSub = this.converterService.pageResult.subscribe((page) => {
       if (page !== null) {
         this.totalRecords = page.totalRecords;
         this.conversions = page.items;
@@ -40,7 +39,8 @@ export class ConversionsComponent implements OnInit, OnDestroy {
   }
 
   fetchConversions(page: number) {
-    this.financesService.fetchConversionsHistory(page - 1)
+    this.converterService
+      .fetchConversionsHistory(page - 1)
       .subscribe((resp: PageResult) => {
         this.conversions = resp.items;
         this.totalRecords = resp.totalRecords;

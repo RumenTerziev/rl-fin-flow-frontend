@@ -46,6 +46,7 @@ label {
 .form-control:focus {
   outline: none;
   border-color: #4caf50;
+  box-shadow: 0 0 5px #4caf50;
 }
 
 .btn {
@@ -64,6 +65,7 @@ label {
 
 .btn-danger:disabled {
   background-color: #cccccc;
+  color: #666666;
   cursor: not-allowed;
 }
 

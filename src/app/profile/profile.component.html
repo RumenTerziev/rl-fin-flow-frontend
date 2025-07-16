@@ -1,16 +1,36 @@
-<div class="table-container">
-  <table class="table bg-primary">
-    <thead>
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngIf="finFlowUser">
-        <td data-label="Username" [textContent]="finFlowUser.username"></td>
-        <td data-label="Email" [textContent]="finFlowUser.email"></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="profile-container">
+  <div class="profile-card">
+    <img class="avatar" src="assets/images/avatar.avif" alt="User Avatar" />
+
+    <div class="profile-info" *ngIf="!editMode">
+      <h2>Username: {{ finFlowUser?.username }}</h2>
+      <h3>Email: {{ finFlowUser?.email }}</h3>
+    </div>
+
+    <form [formGroup]="profileForm" *ngIf="editMode" (ngSubmit)="saveChanges()">
+      <div class="profile-info">
+        <input formControlName="email" class="input-field" placeholder="Email" type="email" />
+        <div class="error-message" *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched">
+          <small *ngIf="profileForm.get('email').errors?.['required']">Email is required.</small>
+          <small *ngIf="profileForm.get('email').errors?.['email']">Please enter a valid email.</small>
+        </div>
+
+        <input formControlName="password" class="input-field" type="password" placeholder="New Password (optional)" />
+        <div class="error-message" *ngIf="profileForm.get('password').invalid && profileForm.get('password').touched">
+          <small *ngIf="profileForm.get('password').errors?.['minlength']">
+            Password must be at least 6 characters.
+          </small>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn-save" type="submit">Save</button>
+        <button class="btn-cancel" type="button" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+
+    <div class="profile-actions" *ngIf="!editMode">
+      <button class="btn-edit" (click)="enableEdit()">Edit</button>
+    </div>
+  </div>
 </div>
