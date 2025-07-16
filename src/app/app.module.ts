@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './loader/loader.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { AboutComponent } from './about/about.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     HttpClientModule,
     ConverterModule,
+    ReactiveFormsModule,
     AuthModule,
   ],
   providers: [
