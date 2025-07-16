@@ -6,13 +6,13 @@ import { Convert } from '../../model/convert.model';
 import { PageResult } from '../../model/page-result.model';
 
 @Injectable()
-export class FinancesService {
+export class ConverterService {
   pageResult = new BehaviorSubject<PageResult>(null);
 
   constructor(private http: HttpClient) {}
 
   fetchConversionsHistory(page: number) {
-    const conversionsUrl = `/api/v1/finances/conversions/mine?page=${page}`;
+    const conversionsUrl = `/api/v1/converter/conversions/mine?page=${page}`;
     return this.http.get(conversionsUrl).pipe(
       map((response: PageResult) => {
         const pageResult = response;
@@ -22,12 +22,8 @@ export class FinancesService {
     );
   }
 
-  convertCurrency(
-    fromCurrency: string,
-    toCurrency: string,
-    amount: number
-  ) {
-    const url = '/api/v1/finances/converter';
+  convertCurrency(fromCurrency: string, toCurrency: string, amount: number) {
+    const url = '/api/v1/converter';
 
     const convertRequest: Convert = {
       fromCurrency: fromCurrency,

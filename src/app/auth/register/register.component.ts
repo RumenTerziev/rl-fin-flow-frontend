@@ -9,41 +9,36 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-  profileForm: NgForm;
-
-  @ViewChild('registerForm') registerForm: NgForm;
-
-  username: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
+  @ViewChild('registerForm') registerForm!: NgForm;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.username = this.registerForm.value.username;
-    this.password = this.registerForm.value.password;
-    this.confirmPassword = this.registerForm.value.confirmPassword;
-    this.firstName = this.registerForm.value.firstName;
-    this.lastName = this.registerForm.value.lastName;
-    this.email = this.registerForm.value.email;
-    this.phoneNumber = this.registerForm.value.phoneNumber;
+    if (!this.registerForm.valid) {
+      return;
+    }
+
+    const { username, password, confirmPassword, email } =
+      this.registerForm.value;
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
 
     this.authService
-      .register(this.username, this.password, this.confirmPassword, this.email)
+      .register(username, password, confirmPassword, email)
       .subscribe({
         next: () => {
           this.registerForm.reset();
-          alert(`Successfully registered user ${this.username}!`);
+          alert(`Successfully registered user ${username}!`);
           this.router.navigate(['/login']);
         },
         error: (e) => {
           console.error(e);
+          alert('Registration failed. Please try again.');
         },
         complete: () => {
           console.info('Registration request complete.');

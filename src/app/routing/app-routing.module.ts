@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
-import { FinancesComponent } from '../finances/finances.component';
+import { ConverterComponent } from '../converter/converter.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
@@ -12,7 +12,11 @@ import { AboutComponent } from '../about/about.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'finances', component: FinancesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'converter',
+    component: ConverterComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
