@@ -110,6 +110,13 @@
 }
 
 @media (max-width: 480px) {
+  .profile-info h3 {
+    font-size: 1.4rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
   .avatar {
     width: 80px;
     height: 80px;
