@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ApplicationModule, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,21 +7,19 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ConverterModule } from './converter/converter.module';
 import { AuthModule } from './auth/auth.module';
-import { ChatAiComponent } from './chat-ai/chat-ai.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './loader/loader.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ApplicationsModule } from './applications/applications.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    ChatAiComponent,
     LoaderComponent,
     AboutComponent,
   ],
@@ -30,8 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ConverterModule,
     ReactiveFormsModule,
+    ApplicationsModule,
     AuthModule,
   ],
   providers: [

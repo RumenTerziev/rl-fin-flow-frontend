@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { Converted } from '../../model/converted.model';
-import { Convert } from '../../model/convert.model';
-import { PageResult } from '../../model/page-result.model';
+import { Converted } from '../../../model/converted.model';
+import { Convert } from '../../../model/convert.model';
+import { PageResult } from '../../../model/page-result.model';
 
 @Injectable()
 export class ConverterService {

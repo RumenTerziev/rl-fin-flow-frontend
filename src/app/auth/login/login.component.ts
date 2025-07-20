@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/converter']);
+        this.router.navigate(['/applications']);
         alert(`Welcome ${this.username}!!!`);
       },
       error: (e) => {
