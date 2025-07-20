@@ -1,0 +1,14 @@
+<div class="apps-container">
+    <h2>Explore My Applications</h2>
+    <div class="app-cards">
+        <div *ngFor="let app of apps" class="app-card">
+            <img [src]="app.image" [alt]="app.title + ' preview'" />
+            <div class="app-info">
+                <h3>{{ app.title }}</h3>
+                <p>{{ app.description }}</p>
+                <a [routerLink]="['/applications', app.route]" class="btn">Open App</a>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

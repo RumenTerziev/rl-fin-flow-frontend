@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Converted } from '../model/converted.model';
+import { Converted } from '../../model/converted.model';
 import { Router } from '@angular/router';
 import { ConverterService } from './service/converter.service';
-import { PageResult } from '../model/page-result.model';
+import { PageResult } from '../../model/page-result.model';
 import { Subscription } from 'rxjs';
 
 @Component({

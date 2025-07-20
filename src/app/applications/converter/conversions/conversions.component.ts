@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Converted } from '../../model/converted.model';
+import { Converted } from '../../../model/converted.model';
 import { ConverterService } from '../service/converter.service';
-import { PageResult } from '../../model/page-result.model';
+import { PageResult } from '../../../model/page-result.model';
 import { Subscription } from 'rxjs';
 
 @Component({

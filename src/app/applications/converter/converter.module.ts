@@ -10,5 +10,6 @@ import { ConverterService } from './service/converter.service';
   declarations: [ConverterComponent, ConversionsComponent],
   imports: [CommonModule, FormsModule, HttpClientModule],
   providers: [ConverterService],
+  exports: [ConverterComponent, ConversionsComponent]
 })
 export class ConverterModule {}
