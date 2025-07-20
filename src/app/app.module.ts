@@ -14,6 +14,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { AboutComponent } from './about/about.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationsModule } from './applications/applications.module';
+import { ServerErrorComponent } from './server-error/server-error.component';
+import { ErrorInterceptor } from './server-error/server-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { ApplicationsModule } from './applications/applications.module';
     ProfileComponent,
     LoaderComponent,
     AboutComponent,
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { ApplicationsModule } from './applications/applications.module';
   providers: [
     provideAnimationsAsync(),
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

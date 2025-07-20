@@ -9,6 +9,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ChatAiComponent } from '../applications/chat-ai/chat-ai.component';
 import { AboutComponent } from '../about/about.component';
 import { ApplicationsComponent } from '../applications/applications.component';
+import { ServerErrorComponent } from '../server-error/server-error.component';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'applications/chat-ai', component: ChatAiComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', redirectTo: '/' } 
 ];
 
 @NgModule({

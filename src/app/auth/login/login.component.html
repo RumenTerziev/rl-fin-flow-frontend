@@ -4,19 +4,49 @@
 
     <div class="form-group">
       <label for="username">Username</label>
-      <input class="form-control" type="text" name="username" id="username" ngModel required
-        placeholder="Enter your username" />
+      <input
+        class="form-control"
+        type="text"
+        name="username"
+        id="username"
+        ngModel
+        required
+        placeholder="Enter your username"
+        #username="ngModel"
+      />
+      <small *ngIf="username.invalid && username.touched" class="text-danger">
+        Username is required.
+      </small>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input class="form-control" type="password" name="password" id="password" ngModel required
-        placeholder="Enter your password" />
+      <input
+        class="form-control"
+        type="password"
+        name="password"
+        id="password"
+        ngModel
+        required
+        placeholder="Enter your password"
+        #password="ngModel"
+      />
+      <small *ngIf="password.invalid && password.touched" class="text-danger">
+        Password is required.
+      </small>
+    </div>
+
+    <div *ngIf="loginError" class="text-danger mb-2 text-center">
+      {{ loginError }}
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-danger" [disabled]="!loginForm.valid">
-        Submit
+      <button
+        type="submit"
+        class="btn btn-danger"
+        [disabled]="!loginForm.valid || isLoading"
+      >
+        {{ isLoading ? 'Logging in...' : 'Submit' }}
       </button>
     </div>
   </form>

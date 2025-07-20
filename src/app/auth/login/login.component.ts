@@ -14,24 +14,32 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  loginError: string = null;
+  isLoading: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.username = this.loginForm.value.username;
-    this.password = this.loginForm.value.password;
+    if (!this.loginForm.valid) return;
 
-    this.authService.login(this.username, this.password).subscribe({
+    this.isLoading = true;
+    this.loginError = null;
+
+    const { username, password } = this.loginForm.value;
+
+    this.authService.login(username, password).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/applications']);
-        alert(`Welcome ${this.username}!!!`);
       },
       error: (e) => {
-        alert('Wrong username or password!');
+        this.isLoading = false;
+        this.loginError = e.message || 'Login failed.';
         console.error(e);
       },
-      complete: () => console.info('complete'),
+      complete: () => console.info('Login process completed.'),
     });
 
     this.loginForm.reset();
