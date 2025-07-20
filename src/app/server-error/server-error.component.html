@@ -1,17 +1,17 @@
 <div class="container-fluid error-wrapper d-flex justify-content-center align-items-center min-vh-100">
-  <div class="row glass-panel p-5 rounded-4 shadow-lg animate-fade-in w-100 mx-2 mx-md-5">
-    <div class="col-md-6 d-flex justify-content-center align-items-center mb-4 mb-md-0">
-      <img src="assets/images/server-error-character.png" alt="Server error character" class="error-image" />
+    <div class="row glass-panel p-5 rounded-4 shadow-lg animate-fade-in w-100 mx-2 mx-md-5">
+        <div class="col-md-6 d-flex justify-content-center align-items-center mb-4 mb-md-0">
+            <img src="assets/images/server-error-character.png" alt="Server error character" class="error-image" />
+        </div>
+        <div class="col-md-6 text-center text-md-start">
+            <h1 class="error-title">Oops! Server Error</h1>
+            <p class="error-message mt-3">
+                Something went wrong on our end. Don't worry — we are on it! Try again later or go back to the homepage.
+            </p>
+            <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-4">
+                <button class="btn btn-primary btn-lg" (click)="goHome()">Back to Home</button>
+                <button class="btn btn-outline-secondary btn-lg" (click)="reload()">Retry</button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6 text-center text-md-start">
-      <h1 class="error-title">Oops! Server Error</h1>
-      <p class="error-message mt-3">
-        Something went wrong on our end. Don't worry — we are on it! Yocan try again later or go back to the home page.
-      </p>
-      <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-4">
-        <button class="btn btn-primary btn-lg" (click)="goHome()">Back to Home</button>
-        <button class="btn btn-outline-secondary btn-lg" (click)="reload()">Retry</button>
-      </div>
-    </div>
-  </div>
 </div>
