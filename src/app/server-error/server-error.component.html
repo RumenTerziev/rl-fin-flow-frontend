@@ -1,0 +1,17 @@
+<div class="container-fluid error-wrapper">
+    <div class="row error-panel">
+        <div class="col-md-6 error-image-container">
+            <img src="assets/images/server-error-character.png" alt="Server error character" class="error-image" />
+        </div>
+        <div class="col-md-6 error-text">
+            <h1 class="error-title">Oops! Server Error</h1>
+            <p class="error-message">
+                Something went wrong on our end. Don't worry — we are on it! Try again later or go back to the homepage.
+            </p>
+            <div class="error-buttons">
+                <button class="btn btn-primary btn-lg" (click)="goHome()">Back to Home</button>
+                <button class="btn btn-outline-secondary btn-lg" (click)="reload()">Retry</button>
+            </div>
+        </div>
+    </div>
+</div>
