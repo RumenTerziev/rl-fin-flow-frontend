@@ -13,8 +13,13 @@
     <p class="subtitle">
       If already logged in, you can access the tools directly:
     </p>
-    <a routerLink="/converter" class="btn-primary" tabindex="0">Start Converting</a>
-    <a routerLink="/chat-ai" class="btn-secondary" tabindex="0">Chat with AI</a>
+
+    <div *ngIf="warningMessage" class="alert-box">
+      {{ warningMessage }}
+    </div>
+
+    <button class="btn-primary" (click)="goToConverter()">Start Converting</button>
+    <button class="btn-secondary" (click)="goToChat()">Chat with AI</button>
   </div>
 </section>
 
