@@ -1,0 +1,58 @@
+name: Build and Push Docker Images to GCR - Frontend
+
+on:
+  workflow_run:
+    workflows: ["Auto Tag and Release (MAJOR.MINOR)"]
+    types:
+      - completed
+
+jobs:
+  build-and-push:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build rl-fin-flow-frontend application
+        run: npm run build
+
+      - name: Extract latest tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0)
+          echo "VERSION=${latest_tag}" >> $GITHUB_ENV
+          echo "Latest tag is $latest_tag"
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configure Docker for GCR
+        run: |
+          gcloud auth configure-docker gcr.io --quiet
+
+      - name: Build and Push Docker Images
+        run: |
+          VERSION_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow-frontend:${VERSION}"
+          LATEST_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow-frontend:latest"
+
+          echo "Building Docker image: $VERSION_IMAGE"
+          docker build -t "$VERSION_IMAGE" -t "$LATEST_IMAGE" .
+
+          echo "Pushing $VERSION_IMAGE"
+          docker push "$VERSION_IMAGE"
+
+          echo "Pushing $LATEST_IMAGE"
+          docker push "$LATEST_IMAGE"
