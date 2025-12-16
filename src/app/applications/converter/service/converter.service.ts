@@ -23,7 +23,7 @@ export class ConverterService {
   }
 
   convertCurrency(fromCurrency: string, toCurrency: string, amount: number) {
-    const url = '/api/v1/converter';
+    const url = '/api/v1/converter/bnb-rates';
 
     const convertRequest: Convert = {
       fromCurrency: fromCurrency,
