@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { FinFlowUser } from '../../model/fin-flow-user.model';
 import { User } from '../../model/user.model';
 
@@ -8,8 +8,14 @@ import { User } from '../../model/user.model';
 export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
+  private apiAuthUrl = '/api/v1/auth';
+  private googleAuthUrl = '/api/v1/oauth2/authorization/google';
 
   constructor(private http: HttpClient) {}
+
+  loginWithGoogle(): void {
+    window.location.href = this.googleAuthUrl;
+  }
 
   login(username: string, password: string) {
     const url = '/api/v1/auth/login';
@@ -45,6 +51,7 @@ export class AuthService {
       password,
       confirmPassword,
       email,
+      pictureUrl: '',
     };
 
     return this.http.post<any>(url, user).pipe(catchError(this.handleError));
@@ -58,17 +65,29 @@ export class AuthService {
   }
 
   autoLogin() {
-    const userData = localStorage.getItem('userData');
-    if (!userData) return;
+    this.http
+      .get<User>('/api/v1/users/me', { withCredentials: true })
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            this.user.next(new User(user.username));
+          } else {
+            this.user.next(null);
+          }
+        },
+        error: (err) => {
+          this.user.next(null);
+        },
+      });
+  }
 
-    try {
-      const parsed = JSON.parse(userData);
-      const loadedUser = new User(parsed.username);
-      this.user.next(loadedUser);
-      this.autoLogout(3600 * 1000);
-    } catch (e) {
-      console.error('Failed to parse user data', e);
-    }
+  autoLoginFetch(): Observable<User | null> {
+    return this.http
+      .get<User>('/api/v1/users/me', { withCredentials: true })
+      .pipe(
+        map((user) => (user ? new User(user.username) : null)),
+        catchError(() => of(null))
+      );
   }
 
   autoLogout(expirationDuration: number) {

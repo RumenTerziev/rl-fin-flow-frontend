@@ -13,7 +13,7 @@ export class ConverterService {
 
   fetchConversionsHistory(page: number) {
     const conversionsUrl = `/api/v1/converter/conversions/mine?page=${page}`;
-    return this.http.get(conversionsUrl).pipe(
+    return this.http.get(conversionsUrl, { withCredentials: true }).pipe(
       map((response: PageResult) => {
         const pageResult = response;
         this.pageResult.next(pageResult);

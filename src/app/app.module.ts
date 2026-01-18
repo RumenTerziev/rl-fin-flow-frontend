@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationsModule } from './applications/applications.module';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ErrorInterceptor } from './server-error/server-error.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ErrorInterceptor } from './server-error/server-error.interceptor';
     provideAnimationsAsync(),
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

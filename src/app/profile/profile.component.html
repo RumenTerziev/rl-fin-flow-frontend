@@ -1,6 +1,6 @@
 <div class="profile-container">
   <div class="profile-card">
-    <img class="avatar" src="assets/images/avatar.avif" alt="User Avatar" />
+    <img class="avatar" [src]="pictureUrl" alt="User Avatar" />
 
     <div class="profile-info" *ngIf="!editMode">
       <h2>Username: {{ finFlowUser?.username }}</h2>
