@@ -1,30 +1,37 @@
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './service/auth.service';
-import { map, take } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
+import { User } from '../model/user.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
-    constructor(private authService: AuthService, private router: Router) { }
-
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.authService.user.pipe(
-            take(1),
-            map(user => {
-                const isAuth = !!user;
-                if (isAuth) {
-                    return true;
-                }
-                return this.router.createUrlTree(['/login'])
-            })
-        );
+  canActivate(): Observable<boolean | UrlTree> {
+    const currentUser: User = this.authService.user.value;
+    if (currentUser) {
+      return of(true);
     }
+
+    return this.authService.autoLoginFetch().pipe(
+      map((user) => {
+        if (user) {
+          this.authService.user.next(user);
+          return true;
+        }
+        return this.router.createUrlTree(['/login']);
+      }),
+      catchError(() => of(this.router.createUrlTree(['/login'])))
+    );
+  }
 }
