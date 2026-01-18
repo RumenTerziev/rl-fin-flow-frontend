@@ -45,8 +45,8 @@ jobs:
 
       - name: Build and Push Docker Images
         run: |
-          VERSION_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow-frontend:${VERSION}"
-          LATEST_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow-frontend:latest"
+          VERSION_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow:${VERSION}"
+          LATEST_IMAGE="gcr.io/${{ secrets.GCP_PROJECT_ID }}/dlrfinflow:latest"
 
           echo "Building Docker image: $VERSION_IMAGE"
           docker build -t "$VERSION_IMAGE" -t "$LATEST_IMAGE" .
