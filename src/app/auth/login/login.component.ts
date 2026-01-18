@@ -29,6 +29,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+loginWithGoogle(): void {
+  this.authService.loginWithGoogle();
+}
+
+
+
   onSubmit(): void {
     if (!this.loginForm.valid) return;
 

@@ -3,4 +3,5 @@ export class FinFlowUser {
   public password: string;
   public confirmPassword: string;
   public email: string;
+  public pictureUrl: string;
 }
