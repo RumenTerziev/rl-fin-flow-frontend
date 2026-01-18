@@ -21,7 +21,7 @@ const routes: Routes = [
     component: ConverterComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'applications/chat-ai', component: ChatAiComponent, canActivate: [AuthGuard] },

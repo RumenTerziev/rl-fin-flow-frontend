@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   finFlowUser: FinFlowUser;
   editMode: boolean = false;
   profileForm: FormGroup;
+  pictureUrl: string = 'assets/images/avatar.avif';
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}
 
@@ -20,10 +21,15 @@ export class ProfileComponent implements OnInit {
   }
 
   loadUser() {
-    this.http.get<FinFlowUser>('/api/v1/users/me').subscribe((user) => {
-      this.finFlowUser = user;
-      this.createForm();
-    });
+    this.http
+      .get<FinFlowUser>('/api/v1/users/me', { withCredentials: true })
+      .subscribe((user) => {
+        this.finFlowUser = user;
+        if (this.finFlowUser.pictureUrl) {
+          this.pictureUrl = this.finFlowUser.pictureUrl;
+        }
+        this.createForm();
+      });
   }
 
   createForm() {

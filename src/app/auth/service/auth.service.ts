@@ -8,8 +8,13 @@ import { User } from '../../model/user.model';
 export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
+  private apiAuthUrl = '/api/v1/auth';
 
   constructor(private http: HttpClient) {}
+
+  loginWithGoogle(): void {
+    window.location.href = `${this.apiAuthUrl}/google`;
+  }
 
   login(username: string, password: string) {
     const url = '/api/v1/auth/login';
@@ -45,6 +50,7 @@ export class AuthService {
       password,
       confirmPassword,
       email,
+      pictureUrl: '',
     };
 
     return this.http.post<any>(url, user).pipe(catchError(this.handleError));

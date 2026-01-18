@@ -73,6 +73,30 @@ label {
   background-color: #c62828;
 }
 
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #4285f4;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-google:hover {
+  background-color: #357ae8;
+}
+
+.google-logo {
+  width: 20px;
+  height: 20px;
+}
+
 @media screen and (max-width: 500px) {
   .main {
     margin: 1rem;
